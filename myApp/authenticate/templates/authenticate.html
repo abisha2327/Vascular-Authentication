@@ -1,0 +1,123 @@
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>PALM VEIN RECOGNITION</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <link href="../static/css/style.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'auth.css' %}">
+    <title>PALM VEIN RECOGNITION</title>
+</head>
+<style>
+        *{
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline;
+        }
+
+        body {
+            line-height: 1;
+            background: #D9D9D9;
+        }
+        #box{
+           width: 400px;
+           height: 180px;
+           margin: 150px auto 0;
+           background: white;
+           padding-top: 20px;
+           border: 5px solid #00B050;
+           border-radius: 52px;
+        }
+        h1, label, input{
+            text-align: center;
+            display: block;
+        }
+        h1{
+           font-family:    'Noto Serif', serif;
+           font-size: 24pt;
+           margin-bottom: 20px;
+        }
+        label{
+           font-family: 'PT Sans Narrow', sans-serif;
+           font-size: 12pt;
+        }
+        input#user{
+           background: url('{% static "auth/assets/user.svg" %}');
+           background-repeat: no-repeat;
+           outline: none;
+           text-align: start;
+           background-size: 20px;
+           background-position-y: 4px;
+           background-position-x: 3px;
+           margin-left: 70px;
+           width: 160px;
+           margin-bottom: 5px;
+           border: 1px solid #ccc;
+           padding: 6px 20px 6px 30px;
+           font-size: 12pt;
+        }
+        input#file{
+           display: none;
+        }
+        label[for="file"] {
+            border: 1px solid #ccc;
+            padding: 6px 20px 6px 30px;
+            cursor: pointer;
+            margin-left: 70px;
+            width: 160px;
+            background: url('{% static "auth/assets/fingerprint.svg" %}');
+            background-repeat: no-repeat;
+            background-size: 20px;
+            background-position-y: 4px;
+            background-position-x: 3px;
+        }
+        label[for="file"]:hover{
+            background-color: rgb(248, 248, 248);
+        }
+        button{
+            border: 1px solid #ccc;
+            padding: 6px 20px;
+            cursor: pointer;
+            margin: 0 0 0 120px;
+            width: 100px;
+            background-color: #00B050;
+            color: white;
+            border-radius: 10px;
+
+        }
+        button:hover{
+            background-color: #09d163;
+        }
+
+
+    </style>
+<body>
+    <div id="box">
+        <h1>Palm Vein Authentication</h1>
+        <form method="POST" action="{% url 'authenticate' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="text" class="username" name="username" placeholder="User Name" id="user" required>
+            <label for="file">PalmVein</label>
+            <input type="file"  accept="image/*" id="file" name="im"><br>
+            <button type="submit" id="btn">Enter</button>
+
+        </form>
+    </div>
+</body>
+<script>
+    document.querySelector('#btn').addEventListener('click', () => {
+        if (document.querySelector('#user').value != '') {
+            document.querySelector('#span').style.display = 'block'
+
+        }
+    });
+</script>
+
+</html>
